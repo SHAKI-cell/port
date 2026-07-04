@@ -54,14 +54,23 @@ function AnimatedBackground({ theme }) {
       canvas.height = newHeight;
       canvas.style.height = `${newHeight}px`;
 
-      // Distribute points based on screen area
-      const pointCount = Math.floor((canvas.width * canvas.height) / 15000);
-      pointsRef.current = Array.from({ length: pointCount }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-      }));
+      // Distribute points based on screen area, evenly using a grid with jitter to prevent clustering
+      const gridSpacing = 125;
+      const cols = Math.ceil(canvas.width / gridSpacing);
+      const rows = Math.ceil(canvas.height / gridSpacing);
+      const points = [];
+      
+      for (let c = 0; c < cols; c++) {
+        for (let r = 0; r < rows; r++) {
+          points.push({
+            x: (c + Math.random()) * (canvas.width / cols),
+            y: (r + Math.random()) * (canvas.height / rows),
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+          });
+        }
+      }
+      pointsRef.current = points;
     };
     resizeCanvas();
 
@@ -77,14 +86,16 @@ function AnimatedBackground({ theme }) {
         canvas.style.height = `${newHeight}px`;
 
         const currentPoints = pointsRef.current.length;
-        const expectedPoints = Math.floor((canvas.width * canvas.height) / 15000);
+        const expectedPoints = Math.floor((canvas.width * newHeight) / 15000);
         if (expectedPoints > currentPoints) {
           const additionalPoints = expectedPoints - currentPoints;
+          const oldHeight = canvas.height;
           const newPoints = Array.from({ length: additionalPoints }, () => ({
             x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
+            // Only add points in the newly extended bottom height range to keep it uniform
+            y: oldHeight + Math.random() * (newHeight - oldHeight),
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
           }));
           pointsRef.current = [...pointsRef.current, ...newPoints];
         }
@@ -185,7 +196,11 @@ function AnimatedBackground({ theme }) {
       // Draw lines between points
       ctx.lineWidth = currentIsDark ? 0.8 : 0.5;
       for (let i = 0; i < points.length; i++) {
+        let pointConnections = 0;
         for (let j = i + 1; j < points.length; j++) {
+          // Limit connection lines to 2 per point to keep line density uniform and light everywhere
+          if (pointConnections >= 2) break;
+
           const dx = points[i].x - points[j].x;
           const dy = points[i].y - points[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
@@ -197,6 +212,7 @@ function AnimatedBackground({ theme }) {
             ctx.moveTo(points[i].x, points[i].y);
             ctx.lineTo(points[j].x, points[j].y);
             ctx.stroke();
+            pointConnections++;
           }
         }
       }
