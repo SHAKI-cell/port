@@ -140,6 +140,31 @@ function AnimatedBackground({ theme }) {
       const dotOpacity = currentIsDark ? 0.6 : 0.4;
       const dotRadius = currentIsDark ? 1.8 : 1.5;
 
+      // Find the hero image container boundaries dynamically to exclude it from background drawing
+      const heroImageEl = document.querySelector(".hero__blob-container");
+      let imageRect = null;
+      if (heroImageEl) {
+        const rect = heroImageEl.getBoundingClientRect();
+        imageRect = {
+          left: rect.left,
+          right: rect.right,
+          top: rect.top + window.scrollY,
+          bottom: rect.bottom + window.scrollY,
+        };
+      }
+
+      const isInsideImage = (x, y) => {
+        if (!imageRect) return false;
+        // Inner padding so lines fade out nicely right before touching the visual boundary
+        const pad = 10;
+        return (
+          x >= imageRect.left + pad &&
+          x <= imageRect.right - pad &&
+          y >= imageRect.top + pad &&
+          y <= imageRect.bottom - pad
+        );
+      };
+
       // Verify canvas size matches scroll boundaries dynamically
       const currentHeight = Math.max(
         document.documentElement.scrollHeight,
@@ -206,6 +231,10 @@ function AnimatedBackground({ theme }) {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < maxDistance) {
+            // Skip lines that pass inside the profile image zone to keep the shirt/photo clean
+            if (isInsideImage(points[i].x, points[i].y) || isInsideImage(points[j].x, points[j].y)) {
+              continue;
+            }
             const opacityVal = (1 - distance / maxDistance) * lineOpacityMul;
             ctx.strokeStyle = `rgba(${primaryColor}, ${opacityVal})`;
             ctx.beginPath();
@@ -227,6 +256,10 @@ function AnimatedBackground({ theme }) {
           const mouseConnectionDistance = 200;
 
           if (distance < mouseConnectionDistance) {
+            // Skip drawing line connections if either the mouse or point is inside the image bounds
+            if (isInsideImage(points[i].x, points[i].y) || isInsideImage(mousePos.x, mousePos.y)) {
+              continue;
+            }
             const opacityVal = (1 - distance / mouseConnectionDistance) * mouseOpacityMul;
             ctx.strokeStyle = `rgba(${primaryColor}, ${opacityVal})`;
             ctx.beginPath();
@@ -241,6 +274,9 @@ function AnimatedBackground({ theme }) {
       // Draw points
       ctx.fillStyle = `rgba(${primaryColor}, ${dotOpacity})`;
       for (const point of points) {
+        if (isInsideImage(point.x, point.y)) {
+          continue; // Skip drawing points inside the photo boundary
+        }
         ctx.beginPath();
         ctx.arc(point.x, point.y, dotRadius, 0, Math.PI * 2);
         ctx.fill();
