@@ -786,7 +786,7 @@ body.light-mode {
 }
 
 body.light-mode .navbar--scrolled {
-  background: rgba(255, 248, 240, 0.85) !important; /* Cream #FFF8F0 at 85% opacity */
+  background: rgba(255, 248, 240, 0.98) !important; /* Cream #FFF8F0 at 98% opacity */
   border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05) !important;
 }
