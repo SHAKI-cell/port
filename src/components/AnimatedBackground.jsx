@@ -134,11 +134,11 @@ function AnimatedBackground({ theme }) {
       const isLightMode = document.body.classList.contains("light-mode");
       const currentIsDark = !isLightMode;
       const primaryColor = getPrimaryColor(currentIsDark);
-      // Higher opacity multipliers for dark mode
-      const lineOpacityMul = currentIsDark ? 0.7 : 0.4;
-      const mouseOpacityMul = currentIsDark ? 0.8 : 0.5;
-      const dotOpacity = currentIsDark ? 0.6 : 0.4;
-      const dotRadius = currentIsDark ? 1.8 : 1.5;
+      // Higher opacity multipliers for both dark and light modes for maximum visibility
+      const lineOpacityMul = currentIsDark ? 0.7 : 0.8;
+      const mouseOpacityMul = currentIsDark ? 0.8 : 0.85;
+      const dotOpacity = currentIsDark ? 0.6 : 0.75;
+      const dotRadius = currentIsDark ? 1.8 : 1.7;
 
       // Find the hero image container boundaries dynamically to exclude it from background drawing
       const heroImageEl = document.querySelector(".hero__blob-container");
