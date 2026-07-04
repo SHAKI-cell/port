@@ -135,9 +135,9 @@ function AnimatedBackground({ theme }) {
       const currentIsDark = !isLightMode;
       const primaryColor = getPrimaryColor(currentIsDark);
       // Higher opacity multipliers for both dark and light modes for maximum visibility
-      const lineOpacityMul = currentIsDark ? 0.7 : 0.8;
-      const mouseOpacityMul = currentIsDark ? 0.8 : 0.85;
-      const dotOpacity = currentIsDark ? 0.6 : 0.75;
+      const lineOpacityMul = currentIsDark ? 0.7 : 0.95;
+      const mouseOpacityMul = currentIsDark ? 0.8 : 0.95;
+      const dotOpacity = currentIsDark ? 0.6 : 0.9;
       const dotRadius = currentIsDark ? 1.8 : 1.7;
 
       // Find the hero image container boundaries dynamically to exclude it from background drawing
@@ -219,7 +219,7 @@ function AnimatedBackground({ theme }) {
       }
 
       // Draw lines between points
-      ctx.lineWidth = currentIsDark ? 0.8 : 0.5;
+      ctx.lineWidth = currentIsDark ? 0.8 : 0.8;
       for (let i = 0; i < points.length; i++) {
         let pointConnections = 0;
         for (let j = i + 1; j < points.length; j++) {
