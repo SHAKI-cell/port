@@ -140,53 +140,39 @@ function AnimatedBackground({ theme }) {
       const dotOpacity = currentIsDark ? 0.6 : 0.9;
       const dotRadius = currentIsDark ? 1.8 : 1.7;
 
-      // Find the hero image container boundaries dynamically to exclude it from background drawing
-      const heroImageEl = document.querySelector(".hero__blob-container");
-      let imageRect = null;
-      if (heroImageEl) {
-        const rect = heroImageEl.getBoundingClientRect();
-        imageRect = {
-          left: rect.left,
-          right: rect.right,
-          top: rect.top + window.scrollY,
-          bottom: rect.bottom + window.scrollY,
-        };
-      }
-
-      // Find the hero text content boundaries dynamically to exclude it from background drawing
-      const heroContentEl = document.querySelector(".hero__content");
-      let contentRect = null;
-      if (heroContentEl) {
-        const rect = heroContentEl.getBoundingClientRect();
-        contentRect = {
-          left: rect.left,
-          right: rect.right,
-          top: rect.top + window.scrollY,
-          bottom: rect.bottom + window.scrollY,
-        };
+      // Find all content containers across the portfolio to exclude them from background line drawing
+      const selectors = [
+        ".hero__blob-container",
+        ".hero__content",
+        ".about__content",
+        ".experience__list",
+        ".skills__grid",
+        ".projects__grid",
+        ".contact__content"
+      ];
+      
+      const exclusionRects = [];
+      for (const selector of selectors) {
+        const el = document.querySelector(selector);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          exclusionRects.push({
+            left: rect.left,
+            right: rect.right,
+            top: rect.top + window.scrollY,
+            bottom: rect.bottom + window.scrollY,
+          });
+        }
       }
 
       const isInsideExclusionZone = (x, y) => {
-        // 1. Profile image boundary check
-        if (imageRect) {
-          const pad = 10;
+        for (const rect of exclusionRects) {
+          const pad = 10; // Padding to keep lines clear of card/text boundaries
           if (
-            x >= imageRect.left + pad &&
-            x <= imageRect.right - pad &&
-            y >= imageRect.top + pad &&
-            y <= imageRect.bottom - pad
-          ) {
-            return true;
-          }
-        }
-        // 2. Left column text/button content boundary check
-        if (contentRect) {
-          const pad = 15; // Padding to keep lines clear of button edges and text margins
-          if (
-            x >= contentRect.left - pad &&
-            x <= contentRect.right + pad &&
-            y >= contentRect.top - pad &&
-            y <= contentRect.bottom + pad
+            x >= rect.left - pad &&
+            x <= rect.right + pad &&
+            y >= rect.top - pad &&
+            y <= rect.bottom + pad
           ) {
             return true;
           }
