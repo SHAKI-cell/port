@@ -8,7 +8,7 @@ function Hero() {
     'Mohammad Taqui',
     'Java Full Stack Developer',
     'Backend Developer',
-    'AI/ML Engineer'
+    'GenAI Engineer'
   ];
   const [scrollOpacity, setScrollOpacity] = useState(1);
   const [scrollTranslateY, setScrollTranslateY] = useState(0);
