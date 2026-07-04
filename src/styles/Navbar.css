@@ -37,16 +37,23 @@
   z-index: 1001;
 }
 
-.navbar__logo-text {
-  font-size: 1.5rem;
-  font-weight: 800;
+.navbar__logo-box {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
   color: #ffffff;
-  letter-spacing: -0.02em;
-  transition: transform 0.3s ease;
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.navbar__logo:hover .navbar__logo-text {
-  transform: scale(1.05);
+.navbar__logo:hover .navbar__logo-box {
+  transform: scale(1.08) rotate(2deg);
 }
 
 .navbar__desktop {

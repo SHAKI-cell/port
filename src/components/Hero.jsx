@@ -4,34 +4,63 @@ import '../styles/Hero.css';
 function Hero() {
   const blobRef = useRef(null);
   const textRef = useRef(null);
-  const roleText = 'Competitive Programmer';
+  const roles = [
+    'Mohammad Taqui',
+    'Java Full Stack Developer',
+    'Backend Developer',
+    'AI/ML Engineer'
+  ];
   
   useEffect(() => {
     const element = textRef.current;
     if (!element) return;
     
-    let index = 0;
-    element.textContent = '';
+    let currentRoleIdx = 0;
+    let currentCharIdx = 0;
+    let isDeleting = false;
+    let timeoutId = null;
     
-    const typeInterval = setInterval(() => {
-      if (index < roleText.length) {
-        element.textContent += roleText.charAt(index);
-        index++;
+    const tick = () => {
+      const currentRole = roles[currentRoleIdx];
+      
+      if (!isDeleting) {
+        element.textContent = currentRole.substring(0, currentCharIdx + 1);
+        currentCharIdx++;
+        
+        if (currentCharIdx === currentRole.length) {
+          isDeleting = true;
+          timeoutId = setTimeout(tick, 2000);
+          return;
+        }
+        timeoutId = setTimeout(tick, 80);
       } else {
-        clearInterval(typeInterval);
+        element.textContent = currentRole.substring(0, currentCharIdx - 1);
+        currentCharIdx--;
+        
+        if (currentCharIdx === 0) {
+          isDeleting = false;
+          currentRoleIdx = (currentRoleIdx + 1) % roles.length;
+          timeoutId = setTimeout(tick, 500);
+          return;
+        }
+        timeoutId = setTimeout(tick, 40);
       }
-    }, 80);
+    };
     
-    return () => clearInterval(typeInterval);
+    tick();
+    
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   const techStack = [
-    { name: 'React', icon: (
+    { name: 'Java', icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        <path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/>
       </svg>
     )},
-    { name: 'Node.js', icon: (
+    { name: 'Spring Boot', icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
       </svg>
@@ -41,9 +70,14 @@ function Hero() {
         <path d="M10 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10"/><path d="M16 22l5-5"/><path d="M21 22v-5h-5"/>
       </svg>
     )},
-    { name: 'TypeScript', icon: (
+    { name: 'FastAPI', icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+      </svg>
+    )},
+    { name: 'React', icon: (
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
       </svg>
     )},
   ];
@@ -52,14 +86,14 @@ function Hero() {
     <section id="home" className="hero">
       <div className="hero__container">
         <div className="hero__content">
-          <p className="hero__greeting">Hi, I'm</p>
-          
-          <h1 className="hero__name">Shakib</h1>
-          
-          <h2 className="hero__role">
-            <span ref={textRef} className="hero__role-text"></span>
-            <span className="hero__role-cursor">|</span>
-          </h2>
+          <h1 className="hero__intro">
+            <span className="hero__greeting-text">Hello, I'm</span>
+            <br />
+            <span className="hero__dynamic-wrapper">
+              <span ref={textRef} className="hero__role-text"></span>
+              <span className="hero__role-cursor">|</span>
+            </span>
+          </h1>
           
           <div className="hero__tech-stack">
             {techStack.map((tech) => (
@@ -71,36 +105,45 @@ function Hero() {
           </div>
           
           <p className="hero__description">
-            Full-Stack Developer and competitive programmer with strong DSA fundamentals, 
-            backend developer experienced in building scalable web applications and AI-powered 
-            products using modern tech stacks.
+            Computer Science student with strong programming fundamentals and a problem-solving mindset. 
+            Skilled in building production-ready backends with Spring Boot, FastAPI, and LangChain. 
+            5-Star HackerRank in Java • 500+ problems on CodeChef.
           </p>
           
           <div className="hero__cta">
-            <a href="#work" className="hero__btn hero__btn--primary">
-              <span className="hero__btn-text">View My Work</span>
+            <a href="#contact" className="hero__btn hero__btn--primary">
+              <span className="hero__btn-text">Hire Me</span>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
               </svg>
             </a>
-            <a href="#contact" className="hero__btn hero__btn--secondary">
-              <span className="hero__btn-text">Get In Touch</span>
+            <a href="#projects" className="hero__btn hero__btn--secondary">
+              <span className="hero__btn-text">View Projects</span>
             </a>
           </div>
           
           <div className="hero__social">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="GitHub">
+            {/* GitHub */}
+            <a href="https://github.com/TaquiAlam" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="GitHub">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
                 <path d="M9 18c-4.51 2-5-2-7-2"/>
               </svg>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="LinkedIn">
+            {/* LinkedIn */}
+            <a href="https://linkedin.com/in/mohammad-taqui-alam" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="LinkedIn">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
               </svg>
             </a>
-            <a href="mailto:email@example.com" className="hero__social-link" aria-label="Email">
+            {/* Instagram */}
+            <a href="https://instagram.com/taquialam" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+              </svg>
+            </a>
+            {/* Email */}
+            <a href="mailto:alamtaqui@gmail.com" className="hero__social-link" aria-label="Email">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
               </svg>
@@ -110,15 +153,22 @@ function Hero() {
         
         <div className="hero__image-wrapper">
           <div className="hero__blob-container" ref={blobRef}>
+            {/* Glow Effect Behind Photo */}
             <div className="hero__blob-glow"></div>
             
-            <div className="hero__blob">
+            {/* Photo Container with natural background blend */}
+            <div className="hero__blob hero__blob--transparent">
               <img 
-                src="./pfp.jpg" 
-                alt="Shakib" 
+                src="./pfp_cutout.png" 
+                alt="Mohammad Taqui" 
                 className="hero__blob-image"
               />
+              
+              {/* Bottom Fade Overlay */}
+              <div className="hero__blob-fade"></div>
             </div>
+
+
             
             <div className="hero__particle hero__particle--1"></div>
             <div className="hero__particle hero__particle--2"></div>
@@ -129,10 +179,11 @@ function Hero() {
       </div>
       
       <div className="hero__scroll">
-        <div className="hero__scroll-mouse">
-          <div className="hero__scroll-wheel" />
-        </div>
-        <span className="hero__scroll-text">SCROLL TO EXPLORE</span>
+        <a href="#about" className="hero__scroll-link">
+          <div className="hero__scroll-mouse">
+            <div className="hero__scroll-wheel" />
+          </div>
+        </a>
       </div>
     </section>
   );

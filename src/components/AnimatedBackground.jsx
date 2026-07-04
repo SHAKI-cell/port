@@ -3,15 +3,16 @@ import "../styles/AnimatedBackground.css";
 
 // Helper function to get primary color based on theme
 function getPrimaryColor(isDark) {
-  // Light mode: pitch black (0, 0, 0)
-  // Dark mode: slate blue (100, 110, 160)
-  return isDark ? "100, 110, 160" : "0, 0, 0";
+  // Light mode: pitch black lines
+  // Dark mode: bright blue-white lines for clear visibility
+  return isDark ? "140, 150, 220" : "0, 0, 0";
 }
 
 // Helper function to get blend mode based on theme
 function getBlendMode(isDark) {
-  // Light mode: use multiply to darken, dark mode: use screen to lighten
-  return isDark ? "screen" : "multiply";
+  // Light mode: multiply blends dark lines nicely
+  // Dark mode: normal so lines draw directly on dark background
+  return isDark ? "normal" : "multiply";
 }
 
 /**
@@ -118,8 +119,15 @@ function AnimatedBackground({ theme }) {
       const points = pointsRef.current;
       const mousePos = mousePosRef.current;
       const maxDistance = 150;
-      const currentIsDark = document.documentElement.classList.contains("dark");
+      // Detect theme from body class (light-mode = light, otherwise dark)
+      const isLightMode = document.body.classList.contains("light-mode");
+      const currentIsDark = !isLightMode;
       const primaryColor = getPrimaryColor(currentIsDark);
+      // Higher opacity multipliers for dark mode
+      const lineOpacityMul = currentIsDark ? 0.7 : 0.4;
+      const mouseOpacityMul = currentIsDark ? 0.8 : 0.5;
+      const dotOpacity = currentIsDark ? 0.6 : 0.4;
+      const dotRadius = currentIsDark ? 1.8 : 1.5;
 
       // Verify canvas size matches scroll boundaries dynamically
       const currentHeight = Math.max(
@@ -175,7 +183,7 @@ function AnimatedBackground({ theme }) {
       }
 
       // Draw lines between points
-      ctx.lineWidth = 0.5;
+      ctx.lineWidth = currentIsDark ? 0.8 : 0.5;
       for (let i = 0; i < points.length; i++) {
         for (let j = i + 1; j < points.length; j++) {
           const dx = points[i].x - points[j].x;
@@ -183,7 +191,7 @@ function AnimatedBackground({ theme }) {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < maxDistance) {
-            const opacityVal = (1 - distance / maxDistance) * 0.4;
+            const opacityVal = (1 - distance / maxDistance) * lineOpacityMul;
             ctx.strokeStyle = `rgba(${primaryColor}, ${opacityVal})`;
             ctx.beginPath();
             ctx.moveTo(points[i].x, points[i].y);
@@ -203,7 +211,7 @@ function AnimatedBackground({ theme }) {
           const mouseConnectionDistance = 200;
 
           if (distance < mouseConnectionDistance) {
-            const opacityVal = (1 - distance / mouseConnectionDistance) * 0.5;
+            const opacityVal = (1 - distance / mouseConnectionDistance) * mouseOpacityMul;
             ctx.strokeStyle = `rgba(${primaryColor}, ${opacityVal})`;
             ctx.beginPath();
             ctx.moveTo(points[i].x, points[i].y);
@@ -215,10 +223,10 @@ function AnimatedBackground({ theme }) {
       }
 
       // Draw points
-      ctx.fillStyle = `rgba(${primaryColor}, 0.4)`;
+      ctx.fillStyle = `rgba(${primaryColor}, ${dotOpacity})`;
       for (const point of points) {
         ctx.beginPath();
-        ctx.arc(point.x, point.y, 1.5, 0, Math.PI * 2);
+        ctx.arc(point.x, point.y, dotRadius, 0, Math.PI * 2);
         ctx.fill();
       }
 
