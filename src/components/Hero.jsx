@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../styles/Hero.css';
 
 function Hero() {
@@ -10,7 +10,21 @@ function Hero() {
     'Backend Developer',
     'AI/ML Engineer'
   ];
-  
+  const [scrollOpacity, setScrollOpacity] = useState(1);
+  const [scrollTranslateY, setScrollTranslateY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const newOpacity = Math.max(0, 1 - scrolled / 300);
+      const newTranslateY = scrolled * 0.45; // 0.45x scroll speed downward slide
+      setScrollOpacity(newOpacity);
+      setScrollTranslateY(newTranslateY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   useEffect(() => {
     const element = textRef.current;
     if (!element) return;
@@ -179,7 +193,17 @@ function Hero() {
       </div>
       
       <div className="hero__scroll">
-        <a href="#about" className="hero__scroll-link">
+        <a 
+          href="#about" 
+          className="hero__scroll-link"
+          style={{
+            opacity: scrollOpacity,
+            transform: `translateY(${scrollTranslateY}px)`,
+            pointerEvents: scrollOpacity === 0 ? 'none' : 'auto',
+            display: 'block',
+            transition: 'opacity 0.05s linear, transform 0.05s linear'
+          }}
+        >
           <div className="hero__scroll-mouse">
             <div className="hero__scroll-wheel" />
           </div>
