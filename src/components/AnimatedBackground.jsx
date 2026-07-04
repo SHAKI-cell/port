@@ -153,16 +153,45 @@ function AnimatedBackground({ theme }) {
         };
       }
 
-      const isInsideImage = (x, y) => {
-        if (!imageRect) return false;
-        // Inner padding so lines fade out nicely right before touching the visual boundary
-        const pad = 10;
-        return (
-          x >= imageRect.left + pad &&
-          x <= imageRect.right - pad &&
-          y >= imageRect.top + pad &&
-          y <= imageRect.bottom - pad
-        );
+      // Find the hero text content boundaries dynamically to exclude it from background drawing
+      const heroContentEl = document.querySelector(".hero__content");
+      let contentRect = null;
+      if (heroContentEl) {
+        const rect = heroContentEl.getBoundingClientRect();
+        contentRect = {
+          left: rect.left,
+          right: rect.right,
+          top: rect.top + window.scrollY,
+          bottom: rect.bottom + window.scrollY,
+        };
+      }
+
+      const isInsideExclusionZone = (x, y) => {
+        // 1. Profile image boundary check
+        if (imageRect) {
+          const pad = 10;
+          if (
+            x >= imageRect.left + pad &&
+            x <= imageRect.right - pad &&
+            y >= imageRect.top + pad &&
+            y <= imageRect.bottom - pad
+          ) {
+            return true;
+          }
+        }
+        // 2. Left column text/button content boundary check
+        if (contentRect) {
+          const pad = 15; // Padding to keep lines clear of button edges and text margins
+          if (
+            x >= contentRect.left - pad &&
+            x <= contentRect.right + pad &&
+            y >= contentRect.top - pad &&
+            y <= contentRect.bottom + pad
+          ) {
+            return true;
+          }
+        }
+        return false;
       };
 
       // Verify canvas size matches scroll boundaries dynamically
@@ -231,8 +260,8 @@ function AnimatedBackground({ theme }) {
           const distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < maxDistance) {
-            // Skip lines that pass inside the profile image zone to keep the shirt/photo clean
-            if (isInsideImage(points[i].x, points[i].y) || isInsideImage(points[j].x, points[j].y)) {
+            // Skip lines that pass inside the profile image zone or text content zone to keep layout clean
+            if (isInsideExclusionZone(points[i].x, points[i].y) || isInsideExclusionZone(points[j].x, points[j].y)) {
               continue;
             }
             const opacityVal = (1 - distance / maxDistance) * lineOpacityMul;
@@ -256,8 +285,8 @@ function AnimatedBackground({ theme }) {
           const mouseConnectionDistance = 200;
 
           if (distance < mouseConnectionDistance) {
-            // Skip drawing line connections if either the mouse or point is inside the image bounds
-            if (isInsideImage(points[i].x, points[i].y) || isInsideImage(mousePos.x, mousePos.y)) {
+            // Skip drawing line connections if either the mouse or point is inside an exclusion zone
+            if (isInsideExclusionZone(points[i].x, points[i].y) || isInsideExclusionZone(mousePos.x, mousePos.y)) {
               continue;
             }
             const opacityVal = (1 - distance / mouseConnectionDistance) * mouseOpacityMul;
@@ -274,8 +303,8 @@ function AnimatedBackground({ theme }) {
       // Draw points
       ctx.fillStyle = `rgba(${primaryColor}, ${dotOpacity})`;
       for (const point of points) {
-        if (isInsideImage(point.x, point.y)) {
-          continue; // Skip drawing points inside the photo boundary
+        if (isInsideExclusionZone(point.x, point.y)) {
+          continue; // Skip drawing points inside exclusion zones (photo & text content)
         }
         ctx.beginPath();
         ctx.arc(point.x, point.y, dotRadius, 0, Math.PI * 2);
