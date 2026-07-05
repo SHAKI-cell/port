@@ -74,14 +74,15 @@ function Hero() {
         <path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/>
       </svg>
     )},
-    { name: 'Spring Boot', icon: (
+    { name: 'SpringBoot', icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
       </svg>
     )},
-    { name: 'Python', icon: (
+    { name: 'C', icon: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M10 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10"/><path d="M16 22l5-5"/><path d="M21 22v-5h-5"/>
+        <path d="M12 2L2 7v10l10 5 10-5V7L12 2z" strokeWidth="1.5" />
+        <path d="M14 9a3 3 0 1 0 0 6" strokeWidth="2" />
       </svg>
     )},
     { name: 'Go', icon: (
@@ -134,8 +135,15 @@ function Hero() {
                 <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
               </svg>
             </a>
-            <a href="#projects" className="hero__btn hero__btn--secondary">
-              <span className="hero__btn-text">View Projects</span>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="hero__btn hero__btn--secondary">
+              <span className="hero__btn-text">Resume</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="hero__btn-icon">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                <path d="M10 9H8"/>
+                <path d="M16 13H8"/>
+                <path d="M16 17H8"/>
+              </svg>
             </a>
           </div>
           
@@ -148,13 +156,13 @@ function Hero() {
               </svg>
             </a>
             {/* LinkedIn */}
-            <a href="https://linkedin.com/in/mohammad-taqui-alam" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/mohammad-taqui?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="LinkedIn">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
               </svg>
             </a>
             {/* Instagram */}
-            <a href="https://instagram.com/taquialam" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="Instagram">
+            <a href="https://www.instagram.com/_taquialam13_/?hl=en" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="Instagram">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
               </svg>
@@ -179,6 +187,9 @@ function Hero() {
                 src="./pfp_cutout.png" 
                 alt="Mohammad Taqui" 
                 className="hero__blob-image"
+                draggable="false"
+                onDragStart={(e) => e.preventDefault()}
+                onContextMenu={(e) => e.preventDefault()}
               />
               
               {/* Bottom Fade Overlay */}

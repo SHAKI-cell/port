@@ -4,12 +4,12 @@ import '../styles/Sections.css';
 const skillCategories = [
   {
     title: 'Programming',
-    skills: ['Java', 'C', 'Python', 'JavaScript', 'TypeScript'],
+    skills: ['Java', 'C', 'Python', 'Go'],
     colorClass: 'skills__icon-box--blue',
   },
   {
     title: 'Frameworks',
-    skills: ['Spring Boot', 'FastAPI', 'LangChain', 'React', 'Next.js'],
+    skills: ['SpringBoot', 'LangChain', 'React'],
     colorClass: 'skills__icon-box--purple',
   },
   {

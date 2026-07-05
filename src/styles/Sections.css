@@ -292,12 +292,26 @@ body.light-mode .experience__description {
    ========================================== */
 .skills__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .skills__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .skills__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 .skills__card {
-  padding: 32px 28px;
+  padding: 30px 24px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -383,7 +397,7 @@ body.light-mode .skills__card-title {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: auto;
+  margin-top: 12px;
 }
 
 .skills__tag {
@@ -789,6 +803,10 @@ body.light-mode .navbar--scrolled {
   background: rgba(255, 248, 240, 0.98) !important; /* Cream #FFF8F0 at 98% opacity */
   border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .navbar--scrolled::before {
+  background: rgba(255, 248, 240, 0.98) !important;
 }
 
 body.light-mode .navbar__logo-text {

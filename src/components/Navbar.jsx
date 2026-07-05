@@ -42,7 +42,7 @@ function Navbar({ theme, toggleTheme }) {
   ];
 
   const handleScroll = useCallback(() => {
-    setIsScrolled(window.scrollY > 50);
+    setIsScrolled(window.scrollY > 10);
   }, []);
 
   useEffect(() => {
