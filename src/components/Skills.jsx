@@ -6,21 +6,25 @@ const skillCategories = [
     title: 'Programming',
     skills: ['Java', 'C', 'Python', 'Go'],
     colorClass: 'skills__icon-box--blue',
+    bgImage: '/skills_programming.png',
   },
   {
     title: 'Frameworks',
     skills: ['SpringBoot', 'LangChain', 'React'],
     colorClass: 'skills__icon-box--purple',
+    bgImage: '/skills_frameworks.png',
   },
   {
     title: 'AI & Data',
     skills: ['OpenAI', 'Gemini', 'Ollama', 'ChromaDB', 'RAG', 'Vector Embeddings'],
     colorClass: 'skills__icon-box--green',
+    bgImage: '/skills_ai_data.png',
   },
   {
     title: 'Tools & DB',
     skills: ['SQL', 'Git', 'GitHub', 'Eclipse IDE', 'Visual Studio', 'Uvicorn', 'Pytest'],
     colorClass: 'skills__icon-box--orange',
+    bgImage: '/skills_tools_db.png',
   },
 ];
 
@@ -35,7 +39,15 @@ const Skills = () => {
 
         <div className="skills__grid">
           {skillCategories.map((category, index) => (
-            <div key={index} className="skills__card">
+            <div 
+              key={index} 
+              className="skills__card"
+              style={{
+                backgroundImage: `linear-gradient(160deg, rgba(10,10,20,0.82) 0%, rgba(10,10,20,0.68) 100%), url(${category.bgImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
               <div className={`skills__icon-box ${category.colorClass}`}>
                 <span className="skills__icon-text">{category.title[0]}</span>
               </div>

@@ -321,9 +321,15 @@ body.light-mode .experience__description {
 }
 
 body.light-mode .skills__card {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  background: transparent !important;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+body.light-mode .skills__card .skills__icon-box ~ *,
+body.light-mode .skills__card .skills__card-title {
+  position: relative;
+  z-index: 1;
 }
 
 .skills__card:hover {
