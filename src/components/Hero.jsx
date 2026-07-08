@@ -6,7 +6,7 @@ function Hero() {
   const textRef = useRef(null);
   const roles = [
     'Mohammad Taqui',
-    'Java Full Stack Developer',
+    'Java Full Stack',
     'Backend Developer',
     'GenAI Engineer'
   ];
