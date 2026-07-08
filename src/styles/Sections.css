@@ -801,12 +801,12 @@ body.light-mode {
 
 body.light-mode .navbar--scrolled {
   background: rgba(255, 248, 240, 0.98) !important; /* Cream #FFF8F0 at 98% opacity */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05) !important;
+  border-bottom: none !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 4px 30px rgba(0, 0, 0, 0.05) !important;
 }
 
 body.light-mode .navbar--scrolled::before {
-  background: rgba(255, 248, 240, 0.98) !important;
+  display: none !important;
 }
 
 body.light-mode .navbar__logo-text {
