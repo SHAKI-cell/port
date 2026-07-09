@@ -174,13 +174,12 @@ body.light-mode .about__card-value {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .experience__card {
-  padding: 32px;
-  border-radius: 16px;
+  padding: 40px 36px;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-left: 4px solid rgba(255, 255, 255, 0.15);
