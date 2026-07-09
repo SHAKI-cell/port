@@ -4,8 +4,8 @@
 
 .experience__wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 55% 45%;
+  gap: 32px;
   align-items: stretch;
 }
 
@@ -67,7 +67,7 @@ body.light-mode .experience__bullet::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 550px;
+  min-height: 640px;
 }
 
 @media (max-width: 1100px) {
@@ -81,7 +81,7 @@ body.light-mode .experience__bullet::before {
 .experience__lottie {
   width: 100%;
   height: 100%;
-  min-height: 550px;
+  min-height: 640px;
 }
 
 /* Dark mode glow */
