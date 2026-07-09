@@ -5,12 +5,9 @@ import '../styles/Sections.css';
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="footer__container">
-        <p className="footer__text">
-          Made with <Heart size={16} className="footer__heart" /> using React
-        </p>
+      <div className="footer__container footer__container--single">
         <p className="footer__copyright">
-          © 2026 Mohammad Taqui. All rights reserved.
+          All rights reserved by Taqui Alam &nbsp;·&nbsp; Made with <Heart size={14} className="footer__heart" /> &nbsp;·&nbsp; © {new Date().getFullYear()}
         </p>
       </div>
     </footer>

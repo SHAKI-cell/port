@@ -743,8 +743,8 @@ body.light-mode .contact__textarea:focus {
    FOOTER SECTION
    ========================================== */
 .footer {
-  padding: 40px 24px;
-  background: rgba(10, 10, 15, 0.5);
+  padding: 20px 24px;
+  background: rgba(10, 10, 15, 0.6);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   text-align: center;
   position: relative;
@@ -753,8 +753,8 @@ body.light-mode .contact__textarea:focus {
 }
 
 body.light-mode .footer {
-  background: #f1f5f9;
-  border-top: 1px solid #e2e8f0;
+  background: #EFF1EE;
+  border-top: 1px solid rgba(0,0,0,0.07);
 }
 
 .footer__container {
@@ -787,10 +787,13 @@ body.light-mode .footer__text {
 }
 
 .footer__copyright {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.5);
   margin: 0;
   transition: color 0.5s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 body.light-mode .footer__copyright {

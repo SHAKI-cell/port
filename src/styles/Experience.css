@@ -1,0 +1,73 @@
+/* ==========================================
+   EXPERIENCE SECTION - LAYOUT WITH ANIMATION
+   ========================================== */
+
+.experience__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .experience__wrapper {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Animation Container */
+.experience__animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 100px;
+}
+
+@media (max-width: 1024px) {
+  .experience__animation {
+    order: -1;
+    position: static;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+.experience__lottie {
+  width: 100%;
+  max-width: 420px;
+  filter: drop-shadow(0 0 40px rgba(99, 102, 241, 0.15));
+  transition: filter 0.4s ease;
+}
+
+/* Dark mode — subtle purple glow */
+.experience__lottie {
+  filter: drop-shadow(0 0 35px rgba(99, 102, 241, 0.2));
+}
+
+/* Light mode — warm subtle shadow */
+body.light-mode .experience__lottie {
+  filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.12)) brightness(0.95);
+}
+
+body.light-mode .experience__lottie:hover {
+  filter: drop-shadow(0 12px 40px rgba(99, 102, 241, 0.18)) brightness(0.95);
+}
+
+/* Footer single line fix */
+.footer__container--single {
+  justify-content: center;
+  text-align: center;
+  flex-direction: row;
+  gap: 0;
+  padding: 0;
+}
+
+.footer__container--single .footer__copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.875rem;
+}
