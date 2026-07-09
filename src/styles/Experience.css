@@ -4,9 +4,9 @@
 
 .experience__wrapper {
   display: grid;
-  grid-template-columns: 55% 45%;
-  gap: 32px;
-  align-items: stretch;
+  grid-template-columns: 50% 50%;
+  gap: 24px;
+  align-items: center;
 }
 
 @media (max-width: 1100px) {
@@ -66,8 +66,8 @@ body.light-mode .experience__bullet::before {
 .experience__animation {
   display: flex;
   align-items: center;
-  justify-content: center;
-  min-height: 640px;
+  justify-content: flex-start;
+  margin-left: -40px;
 }
 
 @media (max-width: 1100px) {
@@ -79,9 +79,8 @@ body.light-mode .experience__bullet::before {
 }
 
 .experience__lottie {
-  width: 100%;
-  height: 100%;
-  min-height: 640px;
+  width: 110%;
+  max-width: 600px;
 }
 
 /* Dark mode glow */
