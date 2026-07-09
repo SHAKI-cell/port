@@ -40,10 +40,24 @@ const Experience = () => {
         </div>
 
         <div className="experience__wrapper">
-          {/* Left side - Experience Cards */}
+          {/* LEFT side - Coding Person Lottie Animation */}
+          <div className="experience__animation scroll-reveal sr-left sr-delay-1">
+            <Suspense fallback={<div style={{width:'100%',height:'480px'}} />}>
+              {animationData && (
+                <Lottie
+                  animationData={animationData}
+                  loop={true}
+                  autoplay={true}
+                  className="experience__lottie"
+                />
+              )}
+            </Suspense>
+          </div>
+
+          {/* RIGHT side - Experience Cards */}
           <div className="experience__list">
             {experiences.map((exp, index) => (
-              <div key={index} className={`experience__card scroll-reveal sr-left sr-delay-${index + 1} ${exp.current ? 'experience__card--current' : ''}`}>
+              <div key={index} className={`experience__card scroll-reveal sr-right sr-delay-${index + 1} ${exp.current ? 'experience__card--current' : ''}`}>
                 <div className="experience__card-header">
                   <div>
                     <h3 className="experience__card-title">{exp.title}</h3>
@@ -66,19 +80,6 @@ const Experience = () => {
                 </ul>
               </div>
             ))}
-          </div>
-
-          <div className="experience__animation scroll-reveal sr-right sr-delay-2">
-            <Suspense fallback={<div style={{width:'100%',height:'400px'}} />}>
-              {animationData && (
-                <Lottie
-                  animationData={animationData}
-                  loop={true}
-                  autoplay={true}
-                  className="experience__lottie"
-                />
-              )}
-            </Suspense>
           </div>
         </div>
       </div>

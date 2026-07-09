@@ -4,19 +4,19 @@
 
 .experience__wrapper {
   display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 48px;
+  grid-template-columns: 480px 1fr;
+  gap: 56px;
   align-items: center;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .experience__wrapper {
     grid-template-columns: 1fr;
     gap: 32px;
   }
 }
 
-/* Animation Container */
+/* Animation Container - LEFT */
 .experience__animation {
   display: flex;
   align-items: center;
@@ -25,34 +25,37 @@
   top: 100px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .experience__animation {
-    order: -1;
     position: static;
-    max-width: 360px;
+    max-width: 420px;
     margin: 0 auto;
   }
 }
 
 .experience__lottie {
   width: 100%;
-  max-width: 420px;
-  filter: drop-shadow(0 0 40px rgba(99, 102, 241, 0.15));
+  max-width: 480px;
+  min-height: 420px;
+}
+
+/* Dark mode — vibrant purple glow */
+.experience__lottie {
+  filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.25));
   transition: filter 0.4s ease;
 }
 
-/* Dark mode — subtle purple glow */
-.experience__lottie {
-  filter: drop-shadow(0 0 35px rgba(99, 102, 241, 0.2));
+.experience__lottie:hover {
+  filter: drop-shadow(0 0 50px rgba(99, 102, 241, 0.4));
 }
 
-/* Light mode — warm subtle shadow */
+/* Light mode — warm subtle shadow, slight brightness adjust */
 body.light-mode .experience__lottie {
-  filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.12)) brightness(0.95);
+  filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.15)) brightness(0.92) saturate(1.1);
 }
 
 body.light-mode .experience__lottie:hover {
-  filter: drop-shadow(0 12px 40px rgba(99, 102, 241, 0.18)) brightness(0.95);
+  filter: drop-shadow(0 12px 40px rgba(99, 102, 241, 0.2)) brightness(0.92);
 }
 
 /* Footer single line fix */
