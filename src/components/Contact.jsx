@@ -16,31 +16,22 @@ const Contact = () => {
 
         <div className="contact__content scroll-reveal sr-delay-1">
           <div className="contact__info">
-            <div className="contact__info-item">
-              <div className="contact__info-icon contact__info-icon--blue">
-                <Mail size={24} />
-              </div>
-              <div>
-                <h3 className="contact__info-title">Email</h3>
-                <p className="contact__info-text">
-                  <a href="mailto:alamtaqui@gmail.com" className="contact__info-link">alamtaqui@gmail.com</a>
-                </p>
-              </div>
-            </div>
-            <div className="contact__info-item">
-              <div className="contact__info-icon contact__info-icon--purple">
-                <Phone size={24} />
-              </div>
-              <div>
-                <h3 className="contact__info-title">Phone</h3>
-                <p className="contact__info-text">
-                  <a href="tel:+916306597320" className="contact__info-link">+91 - 6306597320</a>
-                </p>
-              </div>
-            </div>
+            {/* Clickable Email Button Card */}
+            <a href="mailto:alamtaqui@gmail.com" className="contact__button-card contact__button-card--blue">
+              <Mail size={22} className="contact__card-icon" />
+              <span className="contact__card-text">alamtaqui@gmail.com</span>
+            </a>
+
+            {/* Clickable Phone Button Card */}
+            <a href="tel:+916306597320" className="contact__button-card contact__button-card--purple">
+              <Phone size={22} className="contact__card-icon" />
+              <span className="contact__card-text">+91 - 6306597320</span>
+            </a>
+
+            {/* Location (non-clickable info item) */}
             <div className="contact__info-item">
               <div className="contact__info-icon contact__info-icon--green">
-                <MapPin size={24} />
+                <MapPin size={22} />
               </div>
               <div>
                 <h3 className="contact__info-title">Location</h3>

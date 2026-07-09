@@ -146,6 +146,7 @@ function AnimatedBackground({ theme }) {
         ".hero__content",
         ".about__content",
         ".experience__list",
+        ".experience__animation",
         ".skills__grid",
         ".projects__grid",
         ".contact__content"

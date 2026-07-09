@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AnimatedBackground from './components/AnimatedBackground';
 import useScrollReveal from './hooks/useScrollReveal';
+import ScrollToTop from './components/ScrollToTop';
 import './App.css';
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
