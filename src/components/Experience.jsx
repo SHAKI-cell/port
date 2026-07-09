@@ -34,7 +34,7 @@ const Experience = () => {
   return (
     <section id="experience" className="section section--experience">
       <div className="section__container">
-        <div className="section__header">
+        <div className="section__header scroll-reveal">
           <h2 className="section__title">Experience</h2>
           <div className="section__divider" />
         </div>
@@ -43,7 +43,7 @@ const Experience = () => {
           {/* Left side - Experience Cards */}
           <div className="experience__list">
             {experiences.map((exp, index) => (
-              <div key={index} className={`experience__card ${exp.current ? 'experience__card--current' : ''}`}>
+              <div key={index} className={`experience__card scroll-reveal sr-left sr-delay-${index + 1} ${exp.current ? 'experience__card--current' : ''}`}>
                 <div className="experience__card-header">
                   <div>
                     <h3 className="experience__card-title">{exp.title}</h3>
@@ -68,8 +68,7 @@ const Experience = () => {
             ))}
           </div>
 
-          {/* Right side - Coding Person Lottie Animation */}
-          <div className="experience__animation">
+          <div className="experience__animation scroll-reveal sr-right sr-delay-2">
             <Suspense fallback={<div style={{width:'100%',height:'400px'}} />}>
               {animationData && (
                 <Lottie

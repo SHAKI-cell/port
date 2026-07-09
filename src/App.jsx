@@ -8,10 +8,12 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AnimatedBackground from './components/AnimatedBackground';
+import useScrollReveal from './hooks/useScrollReveal';
 import './App.css';
 
 function App() {
   const [theme, setTheme] = useState('dark');
+  useScrollReveal();
 
   const toggleTheme = () => {
     setTheme((prev) => {

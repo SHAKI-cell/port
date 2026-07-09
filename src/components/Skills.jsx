@@ -32,7 +32,7 @@ const Skills = () => {
   return (
     <section id="skills" className="section section--skills">
       <div className="section__container">
-        <div className="section__header">
+        <div className="section__header scroll-reveal">
           <h2 className="section__title">Skills</h2>
           <div className="section__divider" />
         </div>
@@ -41,7 +41,7 @@ const Skills = () => {
           {skillCategories.map((category, index) => (
             <div 
               key={index} 
-              className="skills__card"
+              className={`skills__card scroll-reveal sr-scale sr-delay-${index + 1}`}
               style={{
                 backgroundImage: `linear-gradient(160deg, rgba(10,10,20,0.82) 0%, rgba(10,10,20,0.68) 100%), url(${category.bgImage})`,
                 backgroundSize: 'cover',

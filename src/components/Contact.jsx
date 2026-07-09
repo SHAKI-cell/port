@@ -6,7 +6,7 @@ const Contact = () => {
   return (
     <section id="contact" className="section section--contact">
       <div className="section__container">
-        <div className="section__header">
+        <div className="section__header scroll-reveal">
           <h2 className="section__title">Get in Touch</h2>
           <div className="section__divider" />
           <p className="section__subtitle">
@@ -14,7 +14,7 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="contact__content">
+        <div className="contact__content scroll-reveal sr-delay-1">
           <div className="contact__info">
             <div className="contact__info-item">
               <div className="contact__info-icon contact__info-icon--blue">

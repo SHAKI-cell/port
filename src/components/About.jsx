@@ -13,13 +13,13 @@ const About = () => {
   return (
     <section id="about" className="section section--about">
       <div className="section__container">
-        <div className="section__header">
+        <div className="section__header scroll-reveal">
           <h2 className="section__title">About Me</h2>
           <div className="section__divider" />
         </div>
 
         <div className="about__content">
-          <div className="about__text">
+          <div className="about__text scroll-reveal sr-delay-1">
             <p>
               Computer Science student with strong programming fundamentals, 
               leadership abilities, and a problem-solving mindset. Skilled in writing clean, 
@@ -41,7 +41,7 @@ const About = () => {
             {details.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div key={index} className="about__card">
+                <div key={index} className={`about__card scroll-reveal sr-scale sr-delay-${index + 1}`}>
                   <Icon className="about__card-icon" size={32} />
                   <span className="about__card-label">{item.label}</span>
                   <span className="about__card-value">{item.value}</span>

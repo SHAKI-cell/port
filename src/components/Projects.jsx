@@ -33,14 +33,14 @@ const Projects = () => {
   return (
     <section id="projects" className="section section--projects">
       <div className="section__container">
-        <div className="section__header">
+        <div className="section__header scroll-reveal">
           <h2 className="section__title">Featured Projects</h2>
           <div className="section__divider" />
         </div>
 
         <div className="projects__grid projects__grid--two">
           {projects.map((project, index) => (
-            <div key={index} className="projects__card">
+            <div key={index} className={`projects__card scroll-reveal sr-delay-${index + 1}`}>
               <div className="projects__card-visual">
                 <Star className="projects__card-star" size={48} />
               </div>
